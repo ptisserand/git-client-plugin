@@ -184,6 +184,7 @@ public class CliGitAPIImpl extends LegacyCompatibleGitAPIImpl {
                 if (rs != null)
                     args.add(rs.toString());
 
+	listener.getLogger().println("git fetch args: " + args);
         launchCommandWithCredentials(args, workspace, cred, urlWithCrendentials, url.toString());
 
     }
@@ -208,6 +209,7 @@ public class CliGitAPIImpl extends LegacyCompatibleGitAPIImpl {
 
         StandardCredentials cred = credentials.get(getRemoteUrl(remoteName));
         if (cred == null) cred = defaultCredentials;
+	listener.getLogger().println("git fetch args: " + args);
         launchCommandWithCredentials(args, workspace, cred, null, null);
     }
 
@@ -1283,8 +1285,8 @@ public class CliGitAPIImpl extends LegacyCompatibleGitAPIImpl {
     }
 
     public ObjectId getHeadRev(String url, String branch) throws GitException, InterruptedException {
-        String[] branchExploded = branch.split("/");
-        branch = branchExploded[branchExploded.length-1];
+        // String[] branchExploded = branch.split("/");
+        // branch = branchExploded[branchExploded.length-1];
         ArgumentListBuilder args = new ArgumentListBuilder("ls-remote");
         args.add("-h");
 
