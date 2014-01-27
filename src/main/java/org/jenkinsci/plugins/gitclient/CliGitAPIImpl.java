@@ -1285,8 +1285,10 @@ public class CliGitAPIImpl extends LegacyCompatibleGitAPIImpl {
     }
 
     public ObjectId getHeadRev(String url, String branch) throws GitException, InterruptedException {
-        // String[] branchExploded = branch.split("/");
-        // branch = branchExploded[branchExploded.length-1];
+	int id = branch.indexOf("/");
+	if (-1 != id) {
+	    branch = branch.substring(id + 1);
+	}
         ArgumentListBuilder args = new ArgumentListBuilder("ls-remote");
         args.add("-h");
 
